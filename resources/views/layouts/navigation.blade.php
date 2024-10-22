@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                        {{ __('Feed') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('feed.index')" :active="request()->routeIs('feed.index')">
+                        {{ __('Your Feed') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
+                        {{ __('Create a Post') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('profile.show', auth()->user())" :active="request()->routeIs('profile.show')">
+                        {{ __('Mon profile') }}
+                    </x-nav-link>
                 </div>
             </div>
 

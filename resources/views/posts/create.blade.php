@@ -13,22 +13,22 @@
 
                     <!-- Image -->
                     <div class="mb-4">
-                        <x-label for="image" :value="__('Image')" />
+                        <x-input-label for="image" :value="__('Image')" />
                         <input type="file" id="image" name="image" class="block mt-1 w-full" required />
                         <x-input-error class="mt-2" :messages="$errors->get('image')" />
                     </div>
 
                     <!-- Légende -->
                     <div class="mb-4">
-                        <x-label for="caption" :value="__('Caption')" />
+                        <x-input-label for="caption" :value="__('Caption')" />
                         <textarea id="caption" name="caption" class="block mt-1 w-full" rows="3"></textarea>
                         <x-input-error class="mt-2" :messages="$errors->get('caption')" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <x-button class="ml-4">
+                        <x-primary-button class="ml-4">
                             {{ __('Post') }}
-                        </x-button>
+                        </x-primary-button>
                     </div>
                 </form>
             </div>

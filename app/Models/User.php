@@ -45,4 +45,29 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'post_user_like')->withTimestamps();
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    // Utilisateurs que cet utilisateur suit
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
+    }
+
+    // Utilisateurs qui suivent cet utilisateur
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
 }
