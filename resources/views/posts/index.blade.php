@@ -92,7 +92,7 @@
     <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click.away="open = false" style="display: none;">
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
-            <h2 class="text-lg font-semibold mb-4">Liked by</h2>
+            <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
             <ul>
                 @foreach ($post->likes as $like)
                     <li class="mb-2">
@@ -100,7 +100,7 @@
                     </li>
                 @endforeach
             </ul>
-            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Close</button>
+            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Fermer</button>
         </div>
     </div>
 </div>
@@ -123,13 +123,13 @@
                             name="body" 
                             class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition" 
                             rows="2" 
-                            placeholder="Add a comment..."
+                            placeholder="Ajouter un commentaire..."
                         ></textarea>
                         <button 
                             type="submit" 
                             class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
                         >
-                            Comment
+                            Commenter
                         </button>
                     </form>
                 </div>

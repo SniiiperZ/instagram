@@ -114,8 +114,11 @@
 
             <div class="mt-3 space-y-1">
                 @auth
-                    <x-responsive-nav-link :href="route('profile.edit')">
+                    <x-responsive-nav-link :href="route('profile.show', Auth::user()->id)">
                         {{ __('Mon profil') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('profile.edit')">
+                        {{ __('Paramètres') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->

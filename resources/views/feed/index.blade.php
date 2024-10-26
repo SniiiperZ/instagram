@@ -25,15 +25,15 @@
 
         <!-- Section des publications des utilisateurs suivis -->
         <div class="space-y-6">
-            <h3 class="font-bold text-lg text-gray-700 mb-4">Posts from people you follow</h3>
+            <h3 class="font-bold text-lg text-green-500 mb-4 text-center">Publication des personnes que vous suivez</h3>
             @if($followedPosts->isEmpty())
-                <p class="text-gray-500">You are not following anyone yet.</p>
+                <p class="text-gray-500 text-center">Vous ne suivez encore personne.</p>
             @else
                 @foreach ($followedPosts as $post)
                     <div class="relative bg-white p-6 rounded-lg shadow-lg mb-6">
                         <!-- Bouton de suppression en haut à droite, visible uniquement pour l'auteur -->
                         @if (auth()->id() === $post->user_id)
-                            <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');" class="absolute top-4 right-4">
+                            <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Tu es sûre de vouloir supprimer cette publication?');" class="absolute top-4 right-4">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-700">
@@ -77,7 +77,7 @@
                         <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click.away="open = false" style="display: none;">
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
-            <h2 class="text-lg font-semibold mb-4">Liked by</h2>
+            <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
             <ul>
                 @foreach ($post->likes as $like)
                     <li class="mb-2">
@@ -85,7 +85,7 @@
                     </li>
                 @endforeach
             </ul>
-            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Close</button>
+            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Fermer</button>
         </div>
     </div>
 </div>
@@ -105,13 +105,13 @@
                                 name="body" 
                                 class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition" 
                                 rows="2" 
-                                placeholder="Add a comment..."
+                                placeholder="Ajouter un commentaire..."
                             ></textarea>
                             <button 
                                 type="submit" 
                                 class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
                             >
-                                Comment
+                                Commenter
                             </button>
                         </form>
                     </div>
@@ -119,7 +119,7 @@
             @endif
 
             <!-- Section des posts les plus likés -->
-            <h3 class="font-bold text-lg text-gray-700 mb-4">Most liked posts</h3>
+            <h3 class="font-bold text-lg text-blue-500 mb-4 text-center">Publication les plus appréciés</h3>
             @foreach ($topLikedPosts as $post)
                 <div class="relative bg-white p-6 rounded-lg shadow-lg mb-6">
                     @if (auth()->id() === $post->user_id)
@@ -168,7 +168,7 @@
                     <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click.away="open = false" style="display: none;">
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
-            <h2 class="text-lg font-semibold mb-4">Liked by</h2>
+            <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
             <ul>
                 @foreach ($post->likes as $like)
                     <li class="mb-2">
@@ -176,7 +176,7 @@
                     </li>
                 @endforeach
             </ul>
-            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Close</button>
+            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Fermer</button>
         </div>
     </div>
 </div>
@@ -196,13 +196,13 @@
                             name="body" 
                             class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition" 
                             rows="2" 
-                            placeholder="Add a comment..."
+                            placeholder="Ajouter un commentaire..."
                         ></textarea>
                         <button 
                             type="submit" 
                             class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
                         >
-                            Comment
+                            Commenter
                         </button>
                     </form>
                 </div>
