@@ -68,7 +68,7 @@ class ProfileController extends Controller
 
     public function follow(User $user)
     {
-        if (!auth()->user()->following()->where('following_id', $user->id)->exists()) {
+        if ($user->id !== auth()->id() && !auth()->user()->following()->where('following_id', $user->id)->exists()) {
             auth()->user()->following()->attach($user->id);
         }
     
@@ -77,12 +77,13 @@ class ProfileController extends Controller
     
     public function unfollow(User $user)
     {
-        if (auth()->user()->following()->where('following_id', $user->id)->exists()) {
+        if ($user->id !== auth()->id() && auth()->user()->following()->where('following_id', $user->id)->exists()) {
             auth()->user()->following()->detach($user->id);
         }
     
         return redirect()->back();
     }
+
 
     /**
      * Delete the user's account.

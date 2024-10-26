@@ -65,6 +65,7 @@
                 <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Photo de profil" class="mt-2 w-20 h-20 rounded-full">
             @endif
             <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
+
         </div>
 
         <div class="flex items-center gap-4">

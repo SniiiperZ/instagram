@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -21,10 +22,15 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+
     public function show(Post $post)
-    {
-        return view('posts.show', compact('post'));
-    }
+{
+    // Load only `user` for the post and `user` for each like
+    $post->load('user', 'likes', 'comments.user');
+    return view('posts.show', compact('post'));
+}
+
+
 
     public function store(Request $request)
     {
@@ -45,13 +51,38 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('status', 'Post created successfully!');
     }
+
+    public function share(Post $post)
+    {
+        // Crée un nouveau post avec les mêmes données que le post original
+        Post::create([
+            'user_id' => auth()->id(),
+            'image' => $post->image,
+            'caption' => 'Partagé: ' . $post->caption,
+        ]);
+
+        return redirect()->route('posts.index')->with('status', 'Post shared successfully!');
+    }
+
     public function destroy(Post $post)
     {
-        // Suppression de l'image du post
+        // Vérifiez que seul l'auteur peut supprimer la publication
+        if (auth()->id() !== $post->user_id) {
+            abort(403); // Refuse l'accès si l'utilisateur n'est pas l'auteur
+        }
+
+        // Supprime l'image du stockage
+        if ($post->image) {
+            Storage::delete('public/' . $post->image);
+        }
+
+        // Supprime la publication
         $post->delete();
 
-        return redirect()->route('posts.index')->with('status', 'Post deleted successfully!');
+        // Redirige l'utilisateur avec un message de succès
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
+
 
     public function like(Post $post)
     {
