@@ -48,6 +48,10 @@
                 <x-dropdown-link :href="route('profile.show', Auth::user()->id)">
                     {{ __('Mon profil') }}
                 </x-dropdown-link>
+                <!-- Link to My messages -->
+                <x-dropdown-link :href="route('messages.index')">
+                    {{ __('Messages') }}
+                </x-dropdown-link>
                 
                 <!-- Link to Profile Settings -->
                 <x-dropdown-link :href="route('profile.edit')">

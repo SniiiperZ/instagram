@@ -59,9 +59,11 @@
         </p>
     </div>
 
+<!-- Follow/Unfollow and Message Buttons -->
+<div class="flex space-x-4 mb-4">
     <!-- Follow/Unfollow Button -->
-    <div class="mb-4">
-        @if (auth()->id() !== $user->id) <!-- Condition pour éviter l'auto-follow -->
+    <div>
+        @if (auth()->id() !== $user->id)
             @if (auth()->user()->following->contains($user))
                 <form method="POST" action="{{ route('users.unfollow', $user) }}">
                     @csrf
@@ -75,7 +77,17 @@
             @endif
         @endif
     </div>
+
+    <!-- Message Button -->
+    <div>
+        @if (auth()->id() !== $user->id)
+            <a href="{{ route('messages.chat', ['user' => $user->id]) }}">
+                <x-primary-button>Message</x-primary-button>
+            </a>
+        @endif
+    </div>
 </div>
+
 
 
         <!-- User Posts -->
