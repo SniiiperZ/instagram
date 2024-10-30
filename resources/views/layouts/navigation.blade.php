@@ -10,6 +10,9 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth
+                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                        {{ __('Publications') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('feed.index')" :active="request()->routeIs('feed.index')">
                         {{ __('Top publications') }}
                     </x-nav-link>
@@ -91,6 +94,7 @@
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            @auth
             <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                 {{ __('Publications') }}
             </x-responsive-nav-link>
@@ -103,6 +107,11 @@
             <x-responsive-nav-link :href="route('stories.index')" :active="request()->routeIs('stories.index')">
                 {{ __('Stories') }}
             </x-responsive-nav-link>
+            @else
+            <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                {{ __('Publications') }}
+            </x-responsive-nav-link>
+            @endauth
         </div>
 
         <div class="pt-4 pb-1 border-t border-gray-200">
