@@ -23,7 +23,6 @@
             </form>
         </div>
 
-        <!-- Section des publications des utilisateurs suivis -->
         <div class="space-y-6">
             <h3 class="font-bold text-lg text-green-500 mb-4 text-center">Publication des personnes que vous suivez</h3>
             @if($followedPosts->isEmpty())
@@ -31,7 +30,6 @@
             @else
                 @foreach ($followedPosts as $post)
                     <div class="relative bg-white p-6 rounded-lg shadow-lg mb-6">
-                        <!-- Bouton de suppression en haut à droite, visible uniquement pour l'auteur -->
                         @if (auth()->id() === $post->user_id)
                             <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Tu es sûre de vouloir supprimer cette publication?');" class="absolute top-4 right-4">
                                 @csrf
@@ -57,7 +55,6 @@
                         <p class="text-gray-700 mb-4">{{ $post->caption }}</p>
 
 <div x-data="{ open: false }">
-                        <!-- Likes Section -->
                         <div class="flex items-center space-x-4 mb-4">
                             <p class="text-gray-600 font-bold cursor-pointer" @click="open = true">
             {{ $post->likes()->count() }} Like
@@ -74,7 +71,6 @@
                                 </form>
                             @endif
                         </div>
-                        <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click.away="open = false" style="display: none;">
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
             <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
@@ -90,7 +86,6 @@
     </div>
 </div>
 
-                        <!-- Commentaires Section -->
                         @foreach ($post->comments as $comment)
                             <div class="mt-4 border-t border-gray-200 pt-2">
                                 <a href="{{ route('profile.show', $comment->user) }}" class="text-blue-500 font-semibold">{{ $comment->user->name }}:</a>
@@ -98,7 +93,6 @@
                             </div>
                         @endforeach
 
-                        <!-- Formulaire pour ajouter un commentaire -->
                         <form method="POST" action="{{ route('comments.store', $post) }}" class="mt-4">
                             @csrf
                             <textarea 
@@ -117,7 +111,6 @@
                 @endforeach
             @endif
 
-            <!-- Section des posts les plus likés -->
             <h3 class="font-bold text-lg text-blue-500 mb-4 text-center">Publication les plus appréciés</h3>
             @foreach ($topLikedPosts as $post)
                 <div class="relative bg-white p-6 rounded-lg shadow-lg mb-6">
@@ -145,8 +138,7 @@
                     </a>
                     <p class="text-gray-700 mb-4">{{ $post->caption }}</p>
 
-                    <div x-data="{ open: false }"> <!-- Initialisation de Alpine.js -->
-                    <!-- Likes Section -->
+                    <div x-data="{ open: false }">
                     <div class="flex items-center space-x-4 mb-4">
                         <p class="text-gray-600 font-bold cursor-pointer" @click="open = true">
             {{ $post->likes()->count() }} Likes
@@ -164,7 +156,6 @@
                         @endif
                     </div>
 
-                    <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click.away="open = false" style="display: none;">
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
             <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
@@ -175,12 +166,11 @@
                     </li>
                 @endforeach
             </ul>
-            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Fermer</button>
+            <x-danger-button @click="open = false" >Fermer</x-danger-button>
         </div>
     </div>
 </div>
 
-                    <!-- Commentaires Section -->
                     @foreach ($post->comments as $comment)
                         <div class="mt-4 border-t border-gray-200 pt-2">
                             <a href="{{ route('profile.show', $comment->user) }}" class="text-blue-500 font-semibold">{{ $comment->user->name }}:</a>
@@ -188,7 +178,6 @@
                         </div>
                     @endforeach
 
-                    <!-- Formulaire pour ajouter un commentaire -->
                     <form method="POST" action="{{ route('comments.store', $post) }}" class="mt-4">
                         @csrf
                         <textarea 

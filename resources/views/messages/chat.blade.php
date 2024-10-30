@@ -7,7 +7,6 @@
 
     <div class="container mx-auto py-8">
         <div class="bg-white rounded-lg shadow-lg p-4 mb-4 max-w-lg mx-auto">
-            <!-- Messages List -->
             <div class="overflow-y-auto h-96 p-2 border-b">
                 @foreach ($messages as $message)
                     <div class="{{ $message->sender_id == auth()->id() ? 'text-right' : '' }} mb-4">
@@ -19,7 +18,6 @@
                 @endforeach
             </div>
 
-            <!-- Message Sending Form -->
             <form method="POST" action="{{ route('messages.send') }}" class="mt-4 flex space-x-2">
                 @csrf
                 <input type="hidden" name="receiver_id" value="{{ $user->id }}">

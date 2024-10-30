@@ -14,9 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/feed', [FeedController::class, 'index'])->name('feed.index');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
-Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
@@ -29,8 +27,11 @@ Route::middleware('auth')->group(function () {
     // Création, modification et suppression de posts
     Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::post('/posts/{post}/share', [PostController::class, 'share'])->name('posts.share'); // Ajout de la route de partage ici
+    Route::post('/posts/{post}/share', [PostController::class, 'share'])->name('posts.share');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+    // Les publications populaire
+    Route::get('/feed', [FeedController::class, 'index'])->name('feed.index');
     
     // Likes et commentaires
     Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
     // Gestion du profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     

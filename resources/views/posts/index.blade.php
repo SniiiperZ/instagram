@@ -6,7 +6,6 @@
     </x-slot>
 
     <div class="max-w-4xl mx-auto py-6">
-    <!-- Formulaire de recherche -->
     <div class="bg-white p-6 rounded-lg shadow-md mb-8">
         <form action="{{ route('search') }}" method="GET" class="flex items-center space-x-2">
             <input 
@@ -24,10 +23,9 @@
         </form>
     </div>
 
-    <!-- Section des posts -->
     <div class="space-y-6">
         @foreach ($posts as $post)
-            <div class="bg-white p-6 rounded-lg shadow-lg mb-6 relative"> <!-- Add relative class here -->
+            <div class="bg-white p-6 rounded-lg shadow-lg mb-6 relative">
                 @if (auth()->id() === $post->user_id)
                     <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Tu es sûre de vouloir supprimer cette publication?');" class="absolute top-4 right-4">
     @csrf
@@ -40,9 +38,7 @@
 </form>
 
                 @endif
-                <!-- Rest of the post content goes here -->
 
-                    <!-- Informations de l'utilisateur et date -->
                     <div class="flex items-center space-x-4 mb-4">
                         <img src="{{ $post->user->profile_photo ? asset('storage/' . $post->user->profile_photo) : 'default-avatar.jpg' }}" alt="Profile Photo" class="w-10 h-10 rounded-full">
                         <h3 class="font-bold text-lg">
@@ -51,27 +47,22 @@
                         <span class="text-gray-400 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                     </div>
 
-                    <!-- Image du post -->
                     <a href="{{ route('posts.show', $post) }}">
                         <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-80 object-cover rounded-lg mb-4">
                     </a>
 
-                    <!-- Caption du post -->
                     @if ($post->caption)
                         <a href="{{ route('posts.show', $post) }}">
                             <p class="text-gray-700 mb-4">{{ $post->caption }}</p>
                         </a>
                     @endif
 
-<div x-data="{ open: false }"> <!-- Initialisation de Alpine.js -->
-    <!-- Likes et bouton de like/dislike -->
+<div x-data="{ open: false }">
     <div class="flex items-center space-x-4 mb-4">
-        <!-- Compteur de likes avec un clic pour afficher la modale -->
         <p class="text-gray-600 font-bold cursor-pointer" @click="open = true">
             {{ $post->likes()->count() }} Likes
         </p>
 
-        <!-- Bouton de like/dislike -->
         @if ($post->likes()->where('user_id', auth()->id())->exists())
             <form method="POST" action="{{ route('posts.unlike', $post) }}">
                 @csrf
@@ -89,7 +80,6 @@
         @endif
     </div>
 
-    <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click.away="open = false" style="display: none;">
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
             <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
@@ -108,7 +98,6 @@
 
 
 
-                    <!-- Commentaires du post -->
                     @foreach ($post->comments as $comment)
                         <div class="mt-4 border-t border-gray-200 pt-2">
                             <a href="{{ route('profile.show', $comment->user) }}" class="text-blue-500 font-semibold">{{ $comment->user->name }}:</a>
@@ -116,7 +105,6 @@
                         </div>
                     @endforeach
 
-                    <!-- Formulaire pour ajouter un commentaire -->
                     <form method="POST" action="{{ route('comments.store', $post) }}" class="mt-4">
                         @csrf
                         <textarea 
@@ -136,7 +124,6 @@
             @endforeach
         </div>
 
-        <!-- Pagination -->
         <div class="mt-8">
             {{ $posts->links() }}
         </div>

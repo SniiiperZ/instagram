@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    <!-- Story Upload Form -->
     <div class="max-w-4xl mx-auto py-6">
         <div class="bg-white p-6 rounded-lg shadow-md mb-8 text-center max-w-md mx-auto md:max-w-lg py-6">
             <form action="{{ route('stories.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col items-center space-y-4">
@@ -17,7 +16,6 @@
             </form>
         </div>
 
-        <!-- Story Display Section -->
         <div class="container mx-auto py-8 px-4">
             @if($stories->isEmpty())
             <p class="text-center text-gray-500">No stories available</p>
@@ -32,7 +30,6 @@
             @endif
         </div>
 
-        <!-- Modal -->
         <div id="storyModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden" onclick="closeModal()">
             <div class="bg-white p-6 rounded-lg relative max-w-xs w-full sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto" onclick="event.stopPropagation()">
             <button onclick="closeModal()" class="absolute top-2 right-2  hover:text-red-700 transition duration-200">X</button>
@@ -43,7 +40,6 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         function openModal(imageSrc, userName, createdAt) {
             document.getElementById('modalImage').src = imageSrc;

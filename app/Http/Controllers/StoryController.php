@@ -12,7 +12,7 @@ class StoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Or accept video if you wish
+            'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $path = $request->file('media')->store('stories', 'public');
@@ -20,7 +20,7 @@ class StoryController extends Controller
         Story::create([
             'user_id' => Auth::id(),
             'media_path' => $path,
-            'expires_at' => Carbon::now()->addHours(24), // Story expires in 24 hours
+            'expires_at' => Carbon::now()->addHours(24),
         ]);
 
         return back()->with('success', 'Story posted!');
@@ -28,7 +28,7 @@ class StoryController extends Controller
 
     public function index()
 {
-    $stories = Story::with('user')->active()->get(); // or adjust as needed
+    $stories = Story::with('user')->active()->get();
     return view('stories.index', compact('stories'));
 }
 

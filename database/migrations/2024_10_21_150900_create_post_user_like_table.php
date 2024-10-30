@@ -17,7 +17,7 @@ return new class extends Migration
         $table->foreignId('post_id')->constrained()->onDelete('cascade');
         $table->timestamps();
 
-        $table->unique(['user_id', 'post_id']); // Un utilisateur ne peut liker un post qu'une seule fois
+        $table->unique(['user_id', 'post_id']);
     });
 }
 

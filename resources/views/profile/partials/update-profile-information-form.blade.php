@@ -17,14 +17,12 @@
         @csrf
         @method('patch')
 
-        <!-- Nom -->
         <div>
             <x-input-label for="name" :value="__('Nom')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
@@ -49,14 +47,12 @@
             @endif
         </div>
 
-        <!-- Bio -->
         <div>
             <x-input-label for="bio" :value="__('Bio')" />
             <textarea id="bio" name="bio" class="mt-1 block w-full" rows="3">{{ old('bio', $user->bio) }}</textarea>
             <x-input-error class="mt-2" :messages="$errors->get('bio')" />
         </div>
 
-        <!-- Photo de profil -->
         <div>
             <x-input-label for="profile_photo" :value="__('Photo de profil')" />
             <input type="file" id="profile_photo" name="profile_photo" class="mt-1 block w-full" />

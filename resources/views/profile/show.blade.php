@@ -7,15 +7,12 @@
 
     <div class="container mx-auto py-8">
         <div class="flex flex-col items-center">
-    <!-- Profile Photo -->
     <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : 'default-avatar.jpg' }}" alt="Profile Photo" class="w-24 h-24 rounded-full mb-4">
-    <!-- User Name and Bio -->
     <h2 class="text-2xl font-bold">{{ $user->name }}</h2>
     <p class="text-gray-600 mb-4">{{ $user->bio }}</p>
     
     <div x-data="{ openFollowers: false, openFollowing: false }" class="flex mb-4">
-    <!-- Following Count -->
-    <p class="flex items-center mr-6"> <!-- Add margin-right here -->
+    <p class="flex items-center mr-6">
         <span>
             <span @click="openFollowing = true" class="cursor-pointer text-blue-500">
                 {{ $user->following()->count() }} Following
@@ -36,7 +33,6 @@
         </span>
     </p>
 
-    <!-- Follower Count -->
     <p class="flex items-center">
         <span>
             <span @click="openFollowers = true" class="cursor-pointer text-blue-500">
@@ -60,9 +56,7 @@
 </div>
 
 
-<!-- Follow/Unfollow and Message Buttons -->
 <div class="flex space-x-4 mb-4">
-    <!-- Follow/Unfollow Button -->
     <div>
         @if (auth()->id() !== $user->id)
             @if (auth()->user()->following->contains($user))
@@ -79,7 +73,6 @@
         @endif
     </div>
 
-    <!-- Message Button -->
     <div>
         @if (auth()->id() !== $user->id)
             <a href="{{ route('messages.chat', ['user' => $user->id]) }}">
@@ -91,14 +84,12 @@
 
 
 
-        <!-- User Posts -->
         <div class="mt-8">
             <h3 class="text-lg font-bold text-center mb-6">Publications</h3>
             <div class="grid grid-cols-3 gap-4">
                 @foreach ($posts as $post)
                     <div class="border rounded-lg overflow-hidden">
                         <a href="{{ route('posts.show', $post->id) }}">
-                            <!-- Ensure all images are the same size using object-fit -->
                             <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->caption }}" class="w-full h-48 object-cover">
                             <p class="p-2 text-center">{{ $post->caption }}</p>
                         </a>

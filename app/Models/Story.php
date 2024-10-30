@@ -17,7 +17,6 @@ class Story extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Scope to get only active stories
     public function scopeActive($query)
     {
         return $query->where('expires_at', '>', Carbon::now());

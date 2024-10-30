@@ -28,18 +28,14 @@
 
 @if ($post->likes->isNotEmpty())
     <div>
-    <!-- Envelopper avec Alpine.js -->
 <div x-data="{ open: false }">
-    <!-- Compteur de likes avec un clic pour afficher la modale -->
     <p class="mb-4">
         <span @click="open = true" class="text-gray-600 font-bold cursor-pointer">
             {{ $post->likes()->count() }} J'aimes
         </span>
     </p>
 
-    <!-- Modale cachée par défaut, visible quand `open` est vrai -->
     <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <!-- Ajout de @click.away ici -->
         <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-1/3 p-4">
             <h2 class="text-lg font-semibold mb-4">Aimé par</h2>
             <ul>
@@ -57,9 +53,7 @@
 @endif
 
 <div class="flex space-x-4">
-<!-- Vérifier si l'utilisateur a déjà liké la publication -->
 @if ($post->likes()->where('user_id', auth()->id())->exists())
-    <!-- Dislike Button -->
     <form method="POST" action="{{ route('posts.unlike', $post) }}">
         @csrf
         <x-danger-button>
@@ -67,7 +61,6 @@
         </x-danger-button>
     </form>
 @else
-    <!-- Like Button -->
     <form method="POST" action="{{ route('posts.like', $post) }}">
         @csrf
         <x-primary-button>
@@ -87,7 +80,6 @@
 
                 <hr class="my-4">
 
-                <!-- Section des commentaires -->
                 <h3 class="text-lg font-bold">Commentaires</h3>
                 @forelse ($post->comments as $comment)
     <div class="my-2">
@@ -98,7 +90,6 @@
     <p>Aucun commentaire pour l'instant.</p>
 @endforelse
 
-                <!-- Formulaire pour ajouter un commentaire -->
                 <form method="POST" action="{{ route('comments.store', $post) }}">
                             @csrf
                                 <textarea name="body" class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition mb-4" rows="3" placeholder="Ajouter un commentaire..."></textarea>

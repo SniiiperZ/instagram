@@ -12,12 +12,10 @@ class SearchController extends Controller
     {
         $query = $request->input('query');
 
-        // Recherche d'utilisateurs par nom ou bio
         $users = User::where('name', 'LIKE', "%{$query}%")
                     ->orWhere('bio', 'LIKE', "%{$query}%")
                     ->get();
 
-        // Recherche de posts par légende
         $posts = Post::where('caption', 'LIKE', "%{$query}%")
                     ->get();
 

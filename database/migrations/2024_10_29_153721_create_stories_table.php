@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('stories', function (Blueprint $table) {
     $table->id();
     $table->foreignId('user_id')->constrained()->onDelete('cascade');
-    $table->string('media_path'); // Path to the image/video
-    $table->timestamp('expires_at'); // Expiration date/time for the story
+    $table->string('media_path');
+    $table->timestamp('expires_at');
     $table->timestamps();
 });
 
