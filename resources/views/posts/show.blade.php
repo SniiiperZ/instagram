@@ -27,13 +27,12 @@
                 <hr class="my-4">
 
 @if ($post->likes->isNotEmpty())
-    <div class="p-4">
-    <!-- Modale cachée par défaut, visible quand `open` est vrai -->
+    <div>
     <!-- Envelopper avec Alpine.js -->
 <div x-data="{ open: false }">
     <!-- Compteur de likes avec un clic pour afficher la modale -->
-    <p>
-        <span @click="open = true" class="cursor-pointer text-blue-500">
+    <p class="mb-4">
+        <span @click="open = true" class="text-gray-600 font-bold cursor-pointer">
             {{ $post->likes()->count() }} J'aimes
         </span>
     </p>
@@ -50,16 +49,14 @@
                     </li>
                 @endforeach
             </ul>
-            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Close</button>
+            <x-danger-button @click="open = false" >Fermer</x-danger-button>
         </div>
     </div>
 </div>
 
-</div>
-
 @endif
 
-
+<div class="flex space-x-4">
 <!-- Vérifier si l'utilisateur a déjà liké la publication -->
 @if ($post->likes()->where('user_id', auth()->id())->exists())
     <!-- Dislike Button -->
@@ -85,6 +82,7 @@
         {{ __('Partage') }}
     </x-primary-button>
 </form>
+            </div>
 
 
                 <hr class="my-4">
@@ -103,8 +101,8 @@
                 <!-- Formulaire pour ajouter un commentaire -->
                 <form method="POST" action="{{ route('comments.store', $post) }}">
                             @csrf
-                                <textarea name="body" class="w-full" rows="3" placeholder="Add a comment..."></textarea>
-                                <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Comment</button>
+                                <textarea name="body" class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition mb-4" rows="3" placeholder="Ajouter un commentaire..."></textarea>
+                                <x-primary-button type="submit" >Commenter</x-primary-button>
                         </form>
             </div>
         </div>

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-4xl mx-auto py-12">
+    <div class="max-w-4xl mx-auto py-6">
         <div class="max-w-4xl mx-auto">
             <div class="bg-white shadow-xl sm:rounded-lg p-6">
                 <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
@@ -25,15 +25,15 @@
 
                     <!-- Caption -->
                     <div class="mb-4">
-                        <x-input-label for="caption" :value="__('Caption')" />
-                        <textarea id="caption" name="caption" class="block mt-1 w-full rounded-md border-gray-300" rows="3" placeholder="Write a caption..."></textarea>
+                        <x-input-label for="caption" :value="__('Légende')" />
+                        <textarea id="caption" name="caption" class="block mt-1 w-full rounded-md border-gray-300" rows="3" placeholder="Ecrire une légende..."></textarea>
                         <x-input-error class="mt-2" :messages="$errors->get('caption')" />
                     </div>
 
                     <!-- Submit Button -->
                     <div class="flex items-center justify-center mt-6">
                         <x-primary-button>
-                            {{ __('Post') }}
+                            {{ __('Publier') }}
                         </x-primary-button>
                     </div>
                 </form>

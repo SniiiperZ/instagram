@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\StoryController;
 use Illuminate\Support\Facades\Route;
 
 // Routes accessibles publiquement
@@ -51,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/send', [MessageController::class, 'sendMessage'])->name('messages.send');
 
+    // Stories
+    Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
+    Route::post('/stories', [StoryController::class, 'store'])->name('stories.store');
 });
 
 // Authentification

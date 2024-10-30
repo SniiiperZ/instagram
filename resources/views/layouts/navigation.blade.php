@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
                         {{ __('Créer une publication') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('stories.index')" :active="request()->routeIs('stories.index')">
+                        {{ __('Stories') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -103,6 +106,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
                 {{ __('Créer une publication') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('stories.index')" :active="request()->routeIs('stories.index')">
+                {{ __('Stories') }}
             </x-responsive-nav-link>
         </div>
 

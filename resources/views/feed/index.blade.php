@@ -52,7 +52,7 @@
                             <span class="text-gray-400 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
                         <a href="{{ route('posts.show', $post) }}">
-                            <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-auto rounded-lg mb-4">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-80 object-cover rounded-lg mb-4">
                         </a>
                         <p class="text-gray-700 mb-4">{{ $post->caption }}</p>
 
@@ -85,7 +85,7 @@
                     </li>
                 @endforeach
             </ul>
-            <button @click="open = false" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Fermer</button>
+            <x-danger-button @click="open = false" >Fermer</x-danger-button>
         </div>
     </div>
 </div>
@@ -103,16 +103,15 @@
                             @csrf
                             <textarea 
                                 name="body" 
-                                class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition" 
+                                class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition mb-4" 
                                 rows="2" 
                                 placeholder="Ajouter un commentaire..."
                             ></textarea>
-                            <button 
+                            <x-primary-button 
                                 type="submit" 
-                                class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
                             >
                                 Commenter
-                            </button>
+                            </x-primary-button>
                         </form>
                     </div>
                 @endforeach
@@ -142,7 +141,7 @@
                         <span class="text-gray-400 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                     </div>
                     <a href="{{ route('posts.show', $post) }}">
-                        <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-auto rounded-lg mb-4">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-80 object-cover rounded-lg mb-4">
                     </a>
                     <p class="text-gray-700 mb-4">{{ $post->caption }}</p>
 
@@ -194,16 +193,15 @@
                         @csrf
                         <textarea 
                             name="body" 
-                            class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition" 
+                            class="w-full border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500 transition mb-4" 
                             rows="2" 
                             placeholder="Ajouter un commentaire..."
                         ></textarea>
-                        <button 
+                        <x-primary-button 
                             type="submit" 
-                            class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
                         >
                             Commenter
-                        </button>
+                        </x-primary-button>
                     </form>
                 </div>
             @endforeach
