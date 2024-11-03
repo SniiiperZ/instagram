@@ -9,12 +9,20 @@ use Carbon\Carbon;
 
 class StoryController extends Controller
 {
+    /**
+     * Crée et enregistre une nouvelle story.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
+        // Valide le fichier média
         $request->validate([
             'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Enregistre le fichier et crée la story
         $path = $request->file('media')->store('stories', 'public');
         
         Story::create([
@@ -26,11 +34,16 @@ class StoryController extends Controller
         return back()->with('success', 'Story posted!');
     }
 
+    /**
+     * Affiche les stories actives.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
-{
-    $stories = Story::with('user')->active()->get();
-    return view('stories.index', compact('stories'));
-}
-
-
+    {
+        // Récupère les stories actives en utilisant une portée personnalisée 'active'
+        $stories = Story::with('user')->active()->get();
+        
+        return view('stories.index', compact('stories'));
+    }
 }

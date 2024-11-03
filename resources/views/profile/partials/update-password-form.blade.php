@@ -1,36 +1,43 @@
 <section>
     <header>
+        {{-- Titre de la section --}}
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Mise à jour du mot de passe') }}
         </h2>
 
+        {{-- Description de la section --}}
         <p class="mt-1 text-sm text-gray-600">
             {{ __('Veillez à ce que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.') }}
         </p>
     </header>
 
+    {{-- Formulaire de mise à jour du mot de passe --}}
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
+        {{-- Champ pour le mot de passe actuel --}}
         <div>
             <x-input-label for="update_password_current_password" :value="__('Mot de passe actuel')" />
             <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
             <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
+        {{-- Champ pour le nouveau mot de passe --}}
         <div>
             <x-input-label for="update_password_password" :value="__('Nouveau mot de passe')" />
             <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
+        {{-- Champ pour la confirmation du nouveau mot de passe --}}
         <div>
             <x-input-label for="update_password_password_confirmation" :value="__('Confirmer le mot de passe')" />
             <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
+        {{-- Bouton de sauvegarde et message de confirmation --}}
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Sauvegarder') }}</x-primary-button>
 

@@ -1,19 +1,24 @@
 <x-app-layout>
+    {{-- Début de la section d'en-tête --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
             Résultats de recherche pour "{{ $query }}"
         </h2>
     </x-slot>
+    {{-- Fin de la section d'en-tête --}}
 
     <div class="container mx-auto py-8">
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
 
+            {{-- Formulaire de recherche --}}
             <form action="{{ route('search') }}" method="GET" class="flex items-center justify-center mb-8">
                 <input type="text" name="query" value="{{ $query }}" placeholder="Rechercher des utilisateurs ou des publications"
                        class="border rounded-md p-2 w-1/2">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Rechercher</button>
             </form>
+            {{-- Fin du formulaire de recherche --}}
 
+            {{-- Section des résultats des utilisateurs --}}
             <div class="mt-6">
                 <h3 class="text-lg font-bold text-center mb-4">Utilisateurs</h3>
                 <div class="grid grid-cols-3 gap-4">
@@ -31,7 +36,9 @@
                     @endforelse
                 </div>
             </div>
+            {{-- Fin de la section des résultats des utilisateurs --}}
 
+            {{-- Section des résultats des publications --}}
             <div class="mt-6">
                 <h3 class="text-lg font-bold text-center mb-4">Publications</h3>
                 <div class="grid grid-cols-3 gap-4">
@@ -51,6 +58,7 @@
                     @endforelse
                 </div>
             </div>
+            {{-- Fin de la section des résultats des publications --}}
         </div>
     </div>
 </x-app-layout>
